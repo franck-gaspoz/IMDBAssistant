@@ -1,0 +1,38 @@
+----------------------------;---------------------------------------;---------------------------------------;-------------------------------------
+site						;	url									;	store								;	comments
+----------------------------;---------------------------------------;---------------------------------------;-------------------------------------
+youtu.be					;	https://youtu.be.com				;										;
+youtube						;	https://youtube.com					;										;
+ok.ru						;	https://ok.ru.com					;										;
+filemoon					;	https://filemoon.sx					;										;
+moviesfoundonline			;	https://moviesfoundonline.com		;	https://youtube.com					; 
+lookmovie					;	https://lookmovie.onl				;	https://specter.vidzstore.com/		; https://vidzstore.com/
+the flixer					;	https://theflixertv.to				;										;
+kaido						;   https://kaido.to					;										; anime
+1hd.to						;   https://1hd.to						;										;
+Stream4U					;   https://streamm4u.com.co			;										; any country/any language !
+uqload						;   https://uqload.net					;										;
+gptfims						;   https://gptfims.com					;										;
+Solar movie.sc				;   https://solarmovieru.com			;										;
+himovies					;   https://himovies.sx					;										;
+tokyvideo					;   https://www.tokyvideo.com			;										;
+moviesjoy					;   https://moviesjoy.is				;										;
+xumoplay					;   https://play.xumo.com/				;										; US only, ads. - big streams providers
+azmovies					;   https://azmovies.ag					;	unimited files, doodstream, filemoon, super server, video src ;
+----------------------------;---------------------------------------;---------------------------------------;-------------------------------------
+
+indexs
+------
+
+* https://privacysavvy.com/geoblocking/streaming/free-streaming-sites-for-movies-tv-shows/#h-51-lookmovie
+https://kaido.to/home
+
+* stores:
+
+unimited files
+doodstream
+filemoon
+super server
+video src (vidsrc)
+vipstream
+mixdrop

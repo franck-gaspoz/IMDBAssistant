@@ -8,6 +8,7 @@ public interface IDataProvider
     /// return a model from source properties
     /// </summary>
     /// <param name="source">source properties</param>
+    /// <param name="context">operation context</param>
     /// <returns>movies model or null</returns>
-    MoviesModel? Get(object? source);
+    MoviesModel? Get(object? source, DataProviderContext context);
 }

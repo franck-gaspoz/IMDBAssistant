@@ -38,7 +38,7 @@ public sealed class JsonQueryFileDataProvider : JsonFileDataProvider
     }
 
     /// <inheritdoc/>
-    public override MoviesModel? Get(object? source)
+    public override MoviesModel? Get(object? source, DataProviderContext context)
     {
         if (source == null) return null;
         var src = (string)source;
@@ -62,7 +62,7 @@ public sealed class JsonQueryFileDataProvider : JsonFileDataProvider
         {
             var provider = _serviceProvider
                 .GetRequiredService<JsonQueryDataProvider>();
-            var moviesModel = provider.Get(query);
+            var moviesModel = provider.Get(query,new DataProviderContext());
 
             var createDefault = moviesModel == null
                 || moviesModel.Movies.Count == 0;

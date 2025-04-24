@@ -89,44 +89,60 @@ public sealed class HtmlDocumentBuilder : IDocumentBuilder
         // build detail pages
 
         var index = 0;
-        var builders = new List<HtmlDocumentBuilderContext>();
+        var builders = new List<HtmlDocumentBuilderContext?>();
         foreach (var movie in data.Movies)
             _htmlMovieDocumentBuilder.SetupModel(movie);
 
         foreach (var movie in data.Movies)
         {
-            var builder = new HtmlDocumentBuilderContext(
-                index,
-                data.Movies.Count,
-                Folder_Back + _templateBuilder.TemplateModel
-                    .PageIndexPath(
-                        context,
-                        _dmnSettings.Value.Build.Html.Extension),
-                index > 0 ?
-                    Folder_Back + context.PageFilePath(
-                        data.Movies[index - 1].Key!,
-                        _dmnSettings.Value.Build.Html.Extension)
-                    : null,
-                index < data.Movies.Count - 1 ?
-                    Folder_Back + context.PageFilePath(
-                        data.Movies[index + 1].Key!,
-                        _dmnSettings.Value.Build.Html.Extension)
-                    : null
-                )
+            var queryCacheFile = movie.MetaData.Query?.Metadata?.QueryCacheFiles?.FirstOrDefault();
+            var newData = queryCacheFile != null
+                && File.GetLastWriteTime(queryCacheFile) >= context.CreationDate;
+            var skipBuild = _dmnSettings.Value
+                .Build.LimitToNewData && !newData;
+
+            if (!skipBuild)
             {
-                Folder = folderName
-            };
-            builders.Add(builder);
+                var builder = new HtmlDocumentBuilderContext(
+                    index,
+                    data.Movies.Count,
+                    Folder_Back + _templateBuilder.TemplateModel
+                        .PageIndexPath(
+                            context,
+                            _dmnSettings.Value.Build.Html.Extension),
+                    index > 0 ?
+                        Folder_Back + context.PageFilePath(
+                            data.Movies[index - 1].Key!,
+                            _dmnSettings.Value.Build.Html.Extension)
+                        : null,
+                    index < data.Movies.Count - 1 ?
+                        Folder_Back + context.PageFilePath(
+                            data.Movies[index + 1].Key!,
+                            _dmnSettings.Value.Build.Html.Extension)
+                        : null
+                    )
+                {
+                    Folder = folderName
+                };
+                builders.Add(builder);
+            }
+            else
+            {
+                builders.Add(null);
+                _logger.LogInformation(this, "skip build for item: " + movie.Title);
+            }
+
             index++;
         }
 
         index = 0;
         foreach (var movie in data.Movies)
         {
-            _htmlMovieDocumentBuilder.BuildMovie(
-                context,
-                builders[index],
-                movie);
+            if (builders[index]!=null)
+                _htmlMovieDocumentBuilder.BuildMovie(
+                    context,
+                    builders[index]!,
+                    movie);
             index++;
         }
 

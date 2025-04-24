@@ -1,8 +1,0 @@
-﻿// query format #1 : 'Title'
-// -------------------------
-// - empty lines not allowed (except at start / end)
-// - commented lines allowed
-// - 1 title per line
-// - extract and remove any yeay at end of title for query
-creed iii
-dune 2024 - part II

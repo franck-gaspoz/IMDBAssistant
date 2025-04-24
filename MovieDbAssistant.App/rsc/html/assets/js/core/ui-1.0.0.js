@@ -4,7 +4,7 @@
  * dependencies:
  *      util-1.0.0
  *      template-1.0.0
- *      layout-1.0.0
+ *      ui-layout-1.0.0
  */
 
 /**
@@ -34,10 +34,13 @@ class UI {
         if (inDesktopMode()) {
             const st = window.sessionStorage
             if (!st.getItem('app')) {
+                console.log("add session storage");
                 this.#storeAppProps(
                     app.isWindowed,
                     app.isMinimized,
                     app.isMaximized)
+            } else {
+                console.log("get session storage");
             }
             var pr = this.#getAppProps()
             this.isWindowed = pr.isWindowed
@@ -54,6 +57,7 @@ class UI {
     }
 
     #storeAppProps(isWindowed, isMinimized, isMaximized) {
+        console.log("update session storage");
         const st = window.sessionStorage
         const pr = {
             'isWindowed': isWindowed,
@@ -64,9 +68,9 @@ class UI {
     }
 
     /**
-     * pre setup
+     * init after create
      */
-    preSetup() {
+    init() {
         // apply zoom scale
         this.#applyZoomScale()
 
@@ -75,12 +79,18 @@ class UI {
     }
 
     /**
+     * setup after body tag loaded
+     */
+    beforeLoadSetup() {
+        
+        // apply window state css classes
+        this.#applyWindowStateCssClasses()
+    }
+
+    /**
      * setup (on document ready)
      */
     setup() {
-
-        // apply window state css classes
-        this.#applyWindowStateCssClasses()
 
         // activate dialogs 'closer' buttons
         this.#setupClosersButtons()
@@ -89,7 +99,7 @@ class UI {
         this.#setupDraggables()
 
         // setup zoom for windowed mode
-        this.#setupZoom()
+        this.#enableAutoZoom()
     }
 
     /**
@@ -229,7 +239,7 @@ class UI {
     /**
      * activate zoom for windowed mode
      */
-    #setupZoom() {
+    #enableAutoZoom() {
         $(window).on(Event_Resize, ev => {
             this.#applyZoomScale()
         });
@@ -239,16 +249,25 @@ class UI {
      * apply zoom scale
      */
     #applyZoomScale() {
-        var $w = $(window)
-        const winWidth = $w.width()
-        const refWidth = 1920
-        const z = winWidth / refWidth
+        const z = this.getZoomScale()
 
         $(Tag_Html)
             .css(Attr_Zoom, z);
         if (z > 0)
             $(Query_Prefix_Class + Class_Page_Container_App_Region)
                 .css(Attr_Zoom, 1 / z)
+    }
+
+    /**
+     * get zoom scale of current window
+     * @returns
+     */
+    getZoomScale() {
+        var $w = $(window)
+        const winWidth = $w.width()
+        const refWidth = 1920
+        const z = winWidth / refWidth
+        return z
     }
 
     /**
@@ -320,7 +339,61 @@ class UI {
                 this.isMinimized = true
         }
 
-        if (isWindowStateSignal)
+        if (isWindowStateSignal) {
+            this.#storeAppProps(this.isWindowed, this.isMinimized, this.isMaximized)
             this.#applyWindowStateCssClasses()
+        }
+    }
+
+    // ---------- electron app ------------
+    // class App ?
+
+    canSend() {
+        return app && app.send
+    }
+
+    /** 
+     * minimize main window
+     * @param {HTMLElement} e html element
+     */
+    minimize(e) {
+        if (this.canSend())
+            app.send(Command_Minize)
+    }
+
+    /**
+     * maximize main window
+     * @param {HTMLElement} e html element
+     */
+    maximize(e) {
+        if (this.canSend())
+            app.send(Command_Maximize)
+    }
+
+    /** 
+     * fullscreen main window
+     * @param {HTMLElement} e html element
+     */
+    fullscreen(e) {
+        if (this.canSend())
+            app.send(Command_FullScreen)
+    }
+
+    /** 
+     * restore main window
+     * @param {HTMLElement} e html element
+     */
+    restore(e) {
+        if (this.canSend())
+            app.send(Command_Restore)
+    }
+
+    /** 
+     * close main window
+     * @param {HTMLElement} e html element
+     */
+    close(e) {
+        if (this.canSend())
+            app.send(Command_Close)
     }
 }

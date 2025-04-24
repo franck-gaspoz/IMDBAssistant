@@ -25,6 +25,7 @@ public static class AppLoggerExtensions
         this ILoggingBuilder builder)
     {
         builder.AddConfiguration();
+        AppLogger.ClearLogFile();       
         builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<ILoggerProvider, AppLoggerProvider>());

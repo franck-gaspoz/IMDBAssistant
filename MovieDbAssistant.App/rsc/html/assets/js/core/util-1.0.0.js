@@ -40,12 +40,14 @@ const Var_InDesktopMode = Var_System + '.inDesktopMode';
 
 /*#endregion*/
 
-/*#region ui */
+/** egion ui */
 
 const HRef_Id_Separator = '#'
 
 const Dialog_FadeIn_Time = 100
 const Dialog_FadeOut_Time = 200
+const List_FadeIn_Time = 300
+const Details_FadeIn_Time = 50
 
 const Data_HRef = 'data-href'
 const Data_Target = 'data-target'
@@ -96,6 +98,16 @@ const Undefined = 'undefined';
 
 /*#endregion*/
 
+/* #region electron */
+
+const Command_FullScreen = 'Command_FullScreen'
+const Command_Minize = 'Command_Minimize'
+const Command_Maximize = 'Command_Maximize'
+const Command_Restore = 'Command_Restore'
+const Command_Close = 'Command_Close'
+
+/* #endregion */
+
 /*#endregion ----- */
 
 /*#region ----- kernel ----- */
@@ -135,12 +147,27 @@ function inDesktopMode() {
 /**
  * handle a signal
  * @param {string} name signal name
- * @param {string} dataStr json data
+ * @param {json?} data json data
  */
-function signal(name, dataStr) {
-    var data = JSON.parse(dataStr)
-    console.log("SIGNAL: " + name + " ----- " + dataStr)
-    _ui().signal(name,data)
+function signal(name, data) {
+    //var data = JSON.parse(dataStr)
+    var str = JSON.stringify(data)
+    console.log("⭐⚡SIGNAL " + name + " 📚 " + str)
+    // publish
+    _ui().signal(name, data)
+}
+
+/**
+ * send a signal
+ * @param {string} name signal name
+ * @param {json?} data json data
+ */
+function send(name, data) {
+    var str = JSON.stringify(data)
+    console.log("⚡ SIGNAL ⚡ " + name + " 📚 " + str)
+    // electron
+    if (app && app.signal)
+        app.send(name, data)
 }
 
 /*#endregion ----- */

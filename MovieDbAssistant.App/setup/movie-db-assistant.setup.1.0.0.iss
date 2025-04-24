@@ -2,7 +2,7 @@
 ; https://jrsoftware.org/isdl.php
 
 [Setup]
-SourceDir=..\bin\Release\net8.0-windows10.0.22621.0\win-x64
+SourceDir=..\bin\x64\Release\net8.0-windows10.0.22621.0\win-x64
 
 AppName=Movie Db Assistant
 AppVersion=1.0.0

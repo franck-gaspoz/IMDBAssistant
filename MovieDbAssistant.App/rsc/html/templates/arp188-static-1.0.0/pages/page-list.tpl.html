@@ -15,17 +15,17 @@
 
         // properties
         const props = {{props}}
-        // template engine
+        // bootstrap template engine
         const tpl = new Template()
         const layout = new UILayout()
         const ui = new UI()
-        ui.preSetup()
+        ui.init()
 
         $(document).ready(() => {
-            // bootstrap template engine            
+            // run tpl engine
             tpl.buildItems(data)
+            layout.onPicLoaded = () => layout.showList()
             layout.postSetup()
-            layout.setupItemsLinkId()            
             ui.setup();
         });
 
@@ -41,6 +41,11 @@
 
 <body class="movie-page-list prevent-select">
 
+    <script type="text/javascript">
+        // setup body
+        _ui().beforeLoadSetup()
+    </script>
+
     {{{backgrounds/background-vignette}}}
 
     {{{page-list/navbar-top}}}
@@ -51,7 +56,7 @@
 
     <!-- movie list -->
 
-    <div class="movie-list">
+    <div class="movie-list vertical-scroll" style="display:none">
 
         {{{page-list/item-container}}}
 
@@ -60,6 +65,11 @@
     <!-- dialogs -->
 
     {{{page-list/dialogs/movie-list-settings(id=movie-list-settings)}}}
+
+    <script type="text/javascript">
+        // setup end body
+        _layout().enableGlobalWidgets()
+    </script>
 
 </body>
 

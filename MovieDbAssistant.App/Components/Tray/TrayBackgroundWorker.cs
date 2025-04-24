@@ -63,7 +63,9 @@ sealed class TrayBackgroundWorker : BackgroundWorkerWrapper
             PreDoWork,
             autoRepeat ?? _autoRepeat
             );
-        Setup(() => { OnStop(this); onStop?.Invoke(); });
+        Setup(o => { 
+            OnStop(this); 
+            onStop?.Invoke(); });
 
         base.Run(context, caller);
         return this;

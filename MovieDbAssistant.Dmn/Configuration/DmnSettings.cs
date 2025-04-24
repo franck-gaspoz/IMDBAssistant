@@ -29,4 +29,9 @@ public sealed class DmnSettings
     /// app settings
     /// </summary>
     public required AppMetadataSettings App { get; set; }
+
+    /// <summary>
+    /// media providers
+    /// </summary>
+    public required MediaProvidersSettings MediaProviders { get; set; }
 }

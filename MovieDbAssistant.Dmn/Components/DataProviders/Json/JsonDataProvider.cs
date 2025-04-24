@@ -32,8 +32,9 @@ public class JsonDataProvider : IDataProvider, IIdentifiable
     /// get from text
     /// </summary>
     /// <param name="text">The text.</param>
+    /// <param name="context">context</param>
     /// <returns>A <see cref="MoviesModel"/></returns>
-    public virtual MoviesModel? Get(object? source)
+    public virtual MoviesModel? Get(object? source, DataProviderContext context)
     {
         if (source == null) return null;
         var r = JsonSerializer.Deserialize<MoviesModel>(

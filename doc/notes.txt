@@ -92,3 +92,102 @@ text-shadow: 0 0 5px #FFFFFF88, 0 0 0px #FFFFFF88, 0 0 2px #FFFFFF88, 0 0 4px #4
 Get-AppxPackage -publisher "CN=Franck Gaspoz Software, O=Franck Gaspoz Corporation, C=US"
 Remove-AppxPackage MovieDbAssistant_1.0.0.0_x64__xtrrbsjxvn07w
 add-appxpackage –register AppxManifest.xml
+
+------------------------------------------------------------------
+
+
+        var lastTick = Date.now()
+        var rept = false
+        console.debug("lastTick=" + lastTick)
+        const dbg = true
+
+        var delayedAction = () => setTimeout(
+            () => {
+                var tick = Date.now()
+                var delay = tick - lastTick
+                //if (dbg) console.debug("tick="+tick+" rept="+rept+" after="+delay)
+
+                // rept = false
+
+                const $imgs = $('img')
+                const nbnit = $imgs.length
+                if (dbg) console.debug(nbnit)
+                var nbni = 0
+                $imgs.each((i, e) => {
+                    if (e.src != null)
+                        nbni++
+                    //console.debug(e.src)
+                })
+                rept = nbni != nbnit
+                console.debug(nbni + " / " + nbnit)
+
+                if (rept) {
+                    rept = false
+                    lastTick = tick
+                    if (dbg) console.debug("delay")
+                    delayedAction()
+                }
+                else {
+                    if (dbg) console.debug("show (delayed)")
+                    // fade in
+                    $movieList.fadeIn(List_FadeIn_Time)
+                    this.setupItemsLinkId()
+                    $movieList.removeClass('no-vertical-scroll')
+                }
+            },
+            200
+        )
+
+        // Options for the observer (which mutations to observe)
+        const config = { attributes: true, childList: true, subtree: true };
+
+        // Callback function to execute when mutations are observed
+        const callback = (mutationList, observer) => {
+            for (const mutation of mutationList) {
+                if (mutation.type === "childList") {
+                    //console.debug("A child node has been added or removed.");
+                    lastTick = Date.now()
+                    rept = true
+                } else if (mutation.type === "attributes") {
+                    //console.debug(`The ${mutation.attributeName} attribute was modified.`);
+                    lastTick = Date.now()
+                    rept = true
+                }
+                //console.debug(mutation)
+                if (dbg) console.debug('-')
+            }
+        };
+
+        // Create an observer instance linked to the callback function
+        const observer = new MutationObserver(callback);
+        delayedAction()
+
+        // Start observing the target node for configured mutations
+        observer.observe($movieList[0], config);
+
+<iframe width="560" height="315" src="//ok.ru/videoembed/4903639321296?nochat=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+
+----------------------------------------------------------------------
+
+les ripoux 1984
+https://ok.ru/video/7741833415312
+
+mission pays basque 2017
+https://ok.ru/video/6697667005072
+
+bienvenue chez les chtis
+https://ok.ru/video/5775038352016
+
+le diner de cons 1998
+https://ok.ru/video/5661680863888
+
+to check: multi sources with different props:
+
+champagne! 2022
+https://ok.ru/video/7689691531874   hd+
+https://ok.ru/video/7693137152610   hd
+
+jeannette The Childhood of Joan of Arc 2017
+https://ok.ru/video/7647741676130   long (+2h)
+https://ok.ru/video/7647716575842   normal
+

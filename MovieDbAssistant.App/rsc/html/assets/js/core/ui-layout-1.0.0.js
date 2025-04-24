@@ -6,6 +6,8 @@
  *      util-1.0.0
  */
 
+//const Class_Movie_List = ''
+
 /**
  * ui layout
  * @class
@@ -17,12 +19,19 @@ class UILayout {
     }
 
     /**
-     * post setup : after tpl built
+     * enable widgets
      */
-    postSetup() {
-        this.#setAlternatePics()
+    enableGlobalWidgets() {
         this.#enableClock()
         this.#enableDate()
+    }
+
+    /**
+     * post setup : after tpl built
+     */
+    postSetup() {        
+        this.#setAlternatePics()
+        return this
     }
 
     /**
@@ -88,6 +97,8 @@ class UILayout {
         this.clockUpdating = false
     }
 
+    #imgCount = 0
+
     /**
      * set alternate pics values
      */
@@ -97,6 +108,7 @@ class UILayout {
             + Space
             + Query_Prefix_Class + Class_Alternate_Pic_List)
 
+        this.#imgCount = $pics.length
         var altUrl = props.tpl.props.listMoviePicNotAvailable;
         var altnfUrl = props.tpl.props.listMoviePicNotFound;
         this.#setupAlternatePic($pics, altUrl, altnfUrl)
@@ -106,10 +118,14 @@ class UILayout {
             + Space
             + Query_Prefix_Class + Class_Alternate_Pic_List)
 
+        this.#imgCount += $pics.length
         altUrl = props.tpl.props.detailMoviePicNotAvailable;
         altnfUrl = props.tpl.props.detailMoviePicNotFound;
         this.#setupAlternatePic($pics, altUrl, altnfUrl)
     }
+
+    onPicLoaded = null
+    #imgNum = 0
 
     /**
      * setup alternate pics
@@ -118,8 +134,21 @@ class UILayout {
      * @param {any} altnfUrl alternate url if src null or white spaces
      */
     #setupAlternatePic($set, altUrl, altnfUrl) {
+        const t = this
         $set.each((i, e) => {
             var $e = $(e)
+
+            $e.on(Event_Load, e => {
+                t.#imgNum++
+                const $item = $(e.target).closest('movie-list-item-container')
+                //$item.fadeIn(List_Item_FadeIn_Time)
+                //console.debug(t.#imgNum + ' / ' + t.#imgCount)
+                if (t.#imgNum == t.#imgCount) {
+                    // all pic loaded
+                    if (t.onPicLoaded) t.onPicLoaded()
+                }
+            })
+
             $e.on(Event_Error, () => {
                 const src = $e.attr(Attr_Src)
                 const url = (!src || src == Text_Empty || src == Text_Null) ?
@@ -129,6 +158,7 @@ class UILayout {
             })
         });
     }
+
 
     /**
      * setup links
@@ -214,6 +244,7 @@ class UILayout {
             $i.css('height', h + 'px')
         }
 
+        this.hideBarLoading()
         $i[0].src = img.src
         $i.fadeIn(1000)
     }
@@ -234,22 +265,53 @@ class UILayout {
         var img = new Image();
         img.addEventListener(
             Event_Load,
-            () => this.#handleBackImgLoaded(img), false);
+            () => this.#handleBackImgLoaded(img), false)
+        img.addEventListener(
+            Event_Error,
+            () => this.hideBarLoading(), false)
         img.src = src;
     }
 
     /**
-    * setup items links id (movie list)
+    * scroll to item in movie list
     */
-    setupItemsLinkId() {
-        var t = window.location.href.split(HRef_Id_Separator)
+    scrollToItemInMovieList() {
+        const t = window.location.href.split(HRef_Id_Separator)
         if (t.length == 2) {
-            var $it = $(Query_Equals_Id_Prefix + t[1] + Query_Selector_Postfix)
-            $(Query_Prefix_Class + Class_Movie_List).scrollTop(
-                $it.offset().top
-                - $it.height()
-            )
+            const $it = $(Query_Equals_Id_Prefix + t[1] + Query_Selector_Postfix)
+            const zoom = _ui().getZoomScale()
+            if (zoom==0) zoom = 1
+            var top = ($it.offset().top - $it.height())
+                * 1/zoom
+            $(Query_Prefix_Class + Class_Movie_List).scrollTop(top)
         }
     }
 
+    /**
+     * show the movie list (on movie list page only)
+     */
+    showList() {
+        const $movieList = $('.movie-list')
+        console.debug('show list')
+        $movieList.fadeIn(List_FadeIn_Time)
+        $('.icon-loading').fadeOut()
+        this.scrollToItemInMovieList()
+    }
+
+    /**
+     * show the movie details (on movie details page only)
+     */
+    showDetails() {
+        const $movieDetails = $('.movie-details')
+        console.debug('show details')
+        $movieDetails.fadeIn(Details_FadeIn_Time)
+        $('.icon-loading').fadeOut()
+    }
+
+    /**
+     * hide bar loading
+     */
+    hideBarLoading() {
+        $('.icon-bar-loading').fadeOut()
+    }
 }

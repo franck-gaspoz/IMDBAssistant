@@ -1,0 +1,28 @@
+﻿// query format #2 : 'title source'
+// --------------------------------
+// - empty lines are bloc separators (are ignored at end of file)
+// - commented lines allowed between the 2 lines of specification
+//	-- 1 title per line 
+//	followed by
+//	-- [play url][,download url]
+//  followed by
+//	-- empty line or end of file
+// - extract and remove any year (format YYYY) at end of title for use in query (filter year=)
+//
+wargames
+https://ok.ru/video/8211801574065
+
+tron
+https://ok.ru/video/8211840567985
+
+i robot
+https://ok.ru/video/8211840567985
+
+la planète des singes
+https://ok.ru/video/8211840567985
+
+le souper
+https://ok.ru/video/4997099162200
+
+brazil 1985
+https://ok.ru/video/4795174750808

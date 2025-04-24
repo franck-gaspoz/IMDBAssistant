@@ -21,7 +21,7 @@ public sealed class SignalR : ISignalR
 
     const string MethodName_Handle = "Handle";
     const string TraceLogPrefix = "''''' ";
-    const string TraceLogPrefix2 = "¤¤¤ ";
+    const string TraceLogPrefix2 = "⭐⭐⚡ ";
 
     readonly Dictionary<Type, List<object>> _instanceMap = [];
     readonly Dictionary<Type, List<Type>> _typeMap = [];

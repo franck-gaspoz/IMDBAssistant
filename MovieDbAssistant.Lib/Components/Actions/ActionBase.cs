@@ -59,7 +59,7 @@ public abstract class ActionBase<TCommand> :
     protected readonly ISignalR Signal;
     protected readonly IServiceProvider ServiceProvider;
     protected TCommand? Com;
-    protected string ActionOnGoingMessageKey { get; set; }
+    protected string ActionOnGoingMessage { get; set; }
     protected string MessageErrorUnhandled { get; set; }
     protected string MessageFeatureIsBuzy { get; set; }
 
@@ -80,7 +80,7 @@ public abstract class ActionBase<TCommand> :
         IConfiguration config,
         ISignalR signal,
         IServiceProvider serviceProvider,
-        string actionOnGoingMessageKey,
+        string actionOnGoingMessage,
         bool runInBackground,
         string messageErrorUnhandled,
         string featureIsBuzy)
@@ -90,7 +90,7 @@ public abstract class ActionBase<TCommand> :
         Signal = signal;
         Logger = logger;
         Config = config;
-        ActionOnGoingMessageKey = actionOnGoingMessageKey;
+        ActionOnGoingMessage = actionOnGoingMessage;
         RunInBackground = runInBackground;
         MessageErrorUnhandled = messageErrorUnhandled;
         MessageFeatureIsBuzy = featureIsBuzy;

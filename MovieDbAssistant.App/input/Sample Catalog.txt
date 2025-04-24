@@ -1,0 +1,86 @@
+﻿// query 2: format 'title source'
+// ------------------------------
+// - empty lines are bloc separators (are ignored at end of file)
+// - commented lines allowed between the 2 lines of specification
+//	-- 1 title per line 
+//	followed by
+//	-- [play url][,download url]
+//  followed by
+//	-- empty line or end of file
+// - extract and remove any year at end of title for use in query (year=)
+//
+Je Ne Suis Pas Chinetoque - Histoire Du Racisme 2024
+https://ok.ru/video/7033285511690
+
+La Mécanique de l'Ombre 2016
+https://filemoon.sx/d/mt1bvmn76lyb/La.Mecanique.de.l.Ombre.2016.FRENCH.1080p.BluRay.x264.AAC5.1-_YTS.MX_.mp4
+
+Le Retour des tomates tueuses 1988
+https://ok.ru/video/8816738962097
+
+Dieudionné La bête immonde 2012
+https://www.youtube.com/watch?v=2FohKJ435b8
+
+The Black String 2018
+https://youtu.be/N3-oEgNIUEA
+
+devil seed 2012
+https://www.dailymotion.com/video/x6ex9m3
+
+go fast 2008
+https://filemoon.sx/d/1jq03qy4rxdg/Go.Fast.FRENCH.DVDRip.Xvid-NoTag.avi
+
+A Quiet place: Day One 2024
+https://specter.vidzstore.com/upload/2024/Jul/147188302.mp4,https://specter.vidzstore.com/upload/2024/Jul/147188302.mp4
+
+Polara 2024
+https://theflixertv.to/watch-movie/watch-what-we-find-on-the-road-full-116869.10797292
+
+Sayônara Ryûsei, Konnichiha Jinsei
+https://kaido.to/watch/good-bye-dragon-life-19347?ep=128370
+
+Le cinquième élément
+https://youtu.be/GroVSNjVybs
+
+Nightman 2023
+https://1hd.to/watch-movie/watch-nightman-online-116866/1493350
+
+Fall 2022
+https://azmovies.ag/movie/fall-e357e
+
+Blade Runner 1982
+https://solarmovieru.com/movie/blade-runner-4202.html
+
+Le dernier combat 1983
+https://streamm4u.com.co/movies/the-last-battle-1983-y980y
+
+Le livre des solutions 2023
+https://streamm4u.com.co/movies/the-book-of-solutions-2023-y80cb
+
+Fear 1996
+file://Q:/FILMS/der films gas/Fear.1996.1080p.BluRay.x264-[YTS.AM].mp4
+
+Comme un chien enragé 1986
+Q:/FILMS/der films gas/At.Close.Range.1986.1080p.BluRay.x264-[YTS.AM].mp4
+
+Second tour 2023
+\\DESKTOP-J1OU73V\[ Torrent911.bz ] Second.Tour.2023.FRENCH.1080p.WEB.H264-FW.mkv
+
+The Red 2024
+https://himovies.sx/movie/rippy-115687
+
+la nonne 2018
+https://gptfims.com/filmid-439079.html?play
+
+transformers: le commencement 2024
+https://uqload.net/9dm7bqjbj20t.html
+
+Get Fast 2024
+https://moviesjoy.is/movie/get-fast-117022
+
+The Exorcists 2023
+https://play.xumo.com/free-movies/the-exorcists/XM03K9U5KO06UQ
+
+// -----
+Fous d'irène 2000
+https://ok.ru/video/2680255089215

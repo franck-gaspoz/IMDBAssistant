@@ -64,7 +64,7 @@ abstract class ActionFeatureBase<TCommand> : ActionBase<TCommand>
                 Logger,
                 e.Context!,
                 e.Sender,
-                Config[ActionOnGoingMessageKey]!);
+                ActionOnGoingMessage!);
 
         MessagesErrorOpening_ErrorUnHandled += (o, e) =>
             Messages.Err(MessageErrorUnhandled, '\n' + e.Text);

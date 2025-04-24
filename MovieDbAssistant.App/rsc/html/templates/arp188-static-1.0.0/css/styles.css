@@ -31,6 +31,16 @@ td {
 
 /* #endregion */
 
+/* #region media providers */
+
+.source-id-drive-local,
+.source-id-drive-lan,
+.source-id-drive-usb {
+    filter: invert(100%);
+}
+
+/* #endregion */
+
 /* #region pages containers */
 
 .movie-page-background-container,
@@ -47,8 +57,6 @@ td {
 /* #endregion */
 
 /* #region common */
-
-/* #endregion */
 
 .video-background {
     width: 100%;
@@ -75,7 +83,7 @@ td {
     position: relative;
 }
 
-.movie-list {
+.movie-list,.movie-details {
     overflow-y: auto;
     max-height: Calc(100% - 5.5em);
 }
@@ -86,6 +94,26 @@ td {
 
 .small-list-item {
     top: 3em !important;
+}
+
+div.sources-icons.small-list-item {
+    top: 6em !important;
+}
+
+body.movie-page-list div.sources.no-year.no-rating.no-ratingCount {
+    top: 1.5em !important;
+}
+
+body.movie-page-detail div.sources.no-year.no-rating.no-ratingCount {
+    top: 2.8em !important;
+}
+
+div.sources.no-summary.no-pic {
+    top: 2.5em !important;
+}
+
+div.sources-icons.no-year.no-rating.no-ratingCount {
+    top: 5.4em !important;
 }
 
 body.movie-page-list .movie-list {
@@ -359,12 +387,18 @@ body.movie-page-detail .rating-container {
     scrollbar-width: inherit;
     font-family: comicn;
     font-size: 1.2em;
+    width: 100%;
 }
 
 .play-icon,
 .download-icon {
     width: 48px;
     height: 48px;
+}
+
+.source-icon {
+    height: 36px;
+    opacity: 70%;
 }
 
 .vsep {
@@ -393,9 +427,35 @@ body.movie-page-detail .rating-container {
     overflow: visible;
 }
 
+body.movie-page-list .sources-icons {
+    position: relative;
+    top: 9.5em;
+    text-align: center;
+    text-wrap: nowrap;
+    overflow: visible;
+}
+
+body.movie-page-list .sources-icons:not(.no-pic) {
+    top: 9.5em !important;
+}
+
+body.movie-page-list .sources:not(.no-pic) {
+    top: 5.5em !important;
+}
+
+body.movie-page-detail .sources-icons {
+    position: relative;
+    top: 6em;
+    text-align: center;
+    text-wrap: nowrap;
+    overflow: visible;
+}
+
 body.movie-page-detail .sources {
     top: 2.8em;
 }
+
+/* #endregion */
 
 /* #region nav */
 
@@ -456,6 +516,29 @@ body.movie-page-list .movie-page-bottom-nav-container {
     grid-column: 3;
     text-align: right;
     padding-right: 1em;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.bottom-nav-container-right-left,
+.bottom-nav-container-right-right {
+    grid-row: 1;
+    max-height: 49px;
+}
+
+.bottom-nav-container-right-left {
+    text-align: left;
+    grid-column: 1;
+    display: grid;
+    grid-auto-columns: 50px;
+}
+
+.bottom-nav-container-right-right {
+    text-align: right;
+    grid-column: 2;
+    text-wrap: nowrap;
 }
 
 .top-nav-container-grid {
@@ -551,6 +634,22 @@ body.movie-page-list .movie-page-bottom-nav-container {
     top: 0.28em;
 }
 
+.icon-loading {
+    vertical-align: bottom;
+    position: relative;
+    top: -0.25em;
+}
+
+.icon-bar-loading {
+    vertical-align: bottom;
+    position: relative;
+    top: -0.25em;
+}
+
+body.movie-page-list .icon-bar-loading {
+    display: none;
+}
+
 /* #endregion  */
 
 /* #region movie detail grids */
@@ -604,6 +703,15 @@ table.g-movie-detail-grid2-row-1 {
 
 /* #endregion */
 
+/* #region tranforms styles */
+
+.trsf-comment,.trsr-comment-secondary {
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* #endregion */
+
 /* #region structure styles */
 
 .width100p {
@@ -649,6 +757,10 @@ table.g-movie-detail-grid2-row-1 {
     display: grid;
 }
 
+.block {
+    display: block;
+}
+
 .inline-block {
     display: inline-block;
 }
@@ -656,6 +768,11 @@ table.g-movie-detail-grid2-row-1 {
 .cell1_1 {
     grid-row: 1;
     grid-column: 1;
+}
+
+.cell2_1 {
+    grid-row: 1;
+    grid-column: 2;
 }
 
 .nowrap {
@@ -681,6 +798,14 @@ table.g-movie-detail-grid2-row-1 {
 
 .text-align-right {
     text-align: right;
+}
+
+.no-vertical-scroll {
+    overflow-y:hidden;
+}
+
+.vertical-scroll {
+    overflow-y: scroll;
 }
 
 /* #endregion */
@@ -725,13 +850,14 @@ table.g-movie-detail-grid2-row-1 {
 /* SURCHARGE themeS de base */
 
 .dialog {
-    background-image: url('../img/movie-page-list-wallpapers/cinema-wallpaper-8.jpg');
+    background-image: url('../img/backgrounds/anim-fog-centered-bluegray.webp');
     background-size: cover;
-    border: none;
+    background-position-y: center;
+    background-position-x: center;
 }
 
 .movie-page-list .dialog {
-    background-image: url('../img/movie-page-list-wallpapers/cinema-wallpaper-37.jpg');
+    background-image: url('../img/backgrounds/anim-fog-centered-bluegray.webp');
 }
 
 .arp188-msgbox-text {
@@ -748,8 +874,7 @@ table.g-movie-detail-grid2-row-1 {
 }
 
 .dialog-title-bar {
-    border-bottom: none;
-    border-left: none;
+    border: none;
 }
 
 .dragging .dialog {
@@ -757,20 +882,24 @@ table.g-movie-detail-grid2-row-1 {
     backdrop-filter: none;
 }
 
-.dialog-container.dragging .dialog 
-{
-    background-image: url('../img/movie-page-list-wallpapers/cinema-wallpaper-8.jpg');
-    background-size: cover;
+.dialog-container.dragging .dialog {
+    background-image: url('../img/backgrounds/anim-fog-centered-bluegray.webp');
     backdrop-filter: none;
+    background-size: cover;
+    background-position-y: center;
+    background-position-x: center;
 }
 
 .movie-page-list .dialog-container.dragging .dialog {
-    background-image: url('../img/movie-page-list-wallpapers/cinema-wallpaper-37.jpg');
-    background-size: cover;
+    background-image: url('../img/backgrounds/anim-fog-centered-bluegray.webp');
     backdrop-filter: none;
+    background-size: cover;
+    background-position-y: center;
+    background-position-x: center;
 }
 
-.top-nav-container-right div.icon-container {
+.top-nav-container-right div.icon-container,
+.top-nav-container-left div.icon-container {
     display: inline;
 }
 

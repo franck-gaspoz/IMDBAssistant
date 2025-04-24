@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Text.Json;
 
 using MovieDbAssistant.Dmn.Components.Builders.Html;
@@ -18,18 +19,29 @@ namespace MovieDbAssistant.Dmn.Components.Builders.Templates;
 public partial class TemplateBuilder
 {
     public const string Var_Prefix = "{{";
-
     public const string Var_Postfix = "}}";
 
     public const string Include_Part_Condition_Separator = ":";
-
     public const string Include_Part_Condition_Value_Prefix = "=";
-
     public const string Include_Part_Condition_Value_Postfix = "=";
-
     public const string Include_Part_Condition_Default = "default";
 
     public const string Tpl_Prop_HSep = "hSep";
+    public const string Tpl_Prop_InsertContentPattern = "insertContentPattern";
+
+    const char QuoteDouble = '"';
+    const char QuoteSimple = '\'';
+    const string Br = "<br>";
+    const char Space = ' ';
+    const char Dot = '.';
+    const char EscapeN = '\n';
+    const char EscapeR = '\r';
+    const char ParenthesisClose = ')';
+    const char ParenthesisOpen = '(';
+    const char SquareBracketClose = ']';
+    const char SquareBracketOpen = '[';
+    const char Interrogation = '?';
+    const char Exclamation = '!';
 
     static string KeyToVar(string key) => key.ToFirstLower();
 
@@ -247,6 +259,16 @@ public partial class TemplateBuilder
         _ihsep ?? (_ihsep = _tpl!.DProps[Tpl_Prop_HSep]
             .ToString());
 
+    string? _iinsertContentPattern = null;
+    string _insertContentPattern =>
+        _iinsertContentPattern ?? 
+            (_iinsertContentPattern = _tpl!
+                .DProps[Tpl_Prop_InsertContentPattern]
+                .ToString());
+
+    string InsertContentPattern(string className,string content)
+        => string.Format(_insertContentPattern, className, content);    
+
     /// <summary>
     /// Transform the array.
     /// </summary>
@@ -266,6 +288,147 @@ public partial class TemplateBuilder
                 t);
         }
         return o;
+    }
+
+    /// <summary>
+    /// Transform collapsed text.
+    /// </summary>
+    /// <param name="o">The object</param>
+    /// <returns>An <see cref="object? "/></returns>
+    public object? Transform_CollapsedText(object? o)
+    {
+        if (o == null) return null;
+        var s = o.ToString()!;
+        var k = s.Length;
+        var sb = new StringBuilder();
+
+        for (var i = 0; i < k; i++)
+        {
+            var c = s[i];
+            var prev = i > 0 ? sb.ToString().Last() : Space;
+            var next = i < k-1 ? s[i + 1] : Space;
+
+            if (c==Dot 
+                && prev != Space 
+                && next != Space 
+                && next != QuoteSimple 
+                && next != QuoteDouble
+                && next != ParenthesisClose
+                && next != SquareBracketClose
+                && next != QuoteDouble
+                && next != Dot
+                && next != EscapeN
+                && next != EscapeR)
+            {
+                sb.Append(c);
+                sb.Append(Br);
+            } 
+            else
+            {
+                if (prev != Space 
+                    && prev!=Dot 
+                    && prev!=EscapeN 
+                    && prev!=EscapeR
+                    && char.IsLower(c) 
+                    && char.IsUpper(next))
+                {
+                    sb.Append(c);
+                    sb.Append(Br);
+                }
+                else
+                {
+                    if (prev != Space
+                        && (char.IsLetterOrDigit(next)
+                            || next == SquareBracketOpen)
+                        && (c == ParenthesisClose
+                            || c == SquareBracketClose
+                            || c == Interrogation
+                            || c == Exclamation
+                            || c == ParenthesisOpen))
+                    {
+                        if (c == ParenthesisOpen)
+                        {
+                            sb.Append(Br);
+                            sb.Append(c);
+                        }
+                        else {
+                            sb.Append(c);
+                            sb.Append(Br);
+                        }
+                    }
+                    else
+                        sb.Append(c);
+                }
+            }
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Transform anecdotes text.
+    /// </summary>
+    /// <param name="o">The object</param>
+    /// <returns>An <see cref="object? "/></returns>
+    object? Transform_MarkText(
+        object? o,
+        char markSymbol,
+        string className
+        )
+    {
+        if (o == null) return null;
+        var s = o!.ToString()!;
+        var k = s.Length;
+        var i = 0;
+        while ((i = s.IndexOf(markSymbol, i)) > -1)
+        {
+            var j = s.IndexOf(markSymbol, i + 1);
+            if (j > 0)
+            {
+                var substr = s.Substring(i, j - i + 1);
+                substr = InsertContentPattern(className, substr);
+                s = s[..i] + substr + s[(j + 1)..];
+                i += substr.Length;
+            }
+            else i++;
+        }
+        return s;
+    }
+
+    /// <summary>
+    /// Transform anecdotes text.
+    /// </summary>
+    /// <param name="o">The object</param>
+    /// <returns>An <see cref="object? "/></returns>
+    public object? Transform_Anecdotes(object? o)
+    {
+        if (o == null) return null;
+        var s = Transform_CollapsedText(o)!.ToString();
+        s = Transform_MarkText(s, QuoteDouble, "trsf-comment")!.ToString();
+        s = Transform_MarkText(s, QuoteSimple, "trsf-comment-secondary")!.ToString();
+        s = Transform_RemoveExtraEmptyLines(s)!.ToString();
+        return s;
+    }
+
+    /// <summary>
+    /// Transform that removes extra empty lines
+    /// </summary>
+    /// <param name="o">The object</param>
+    /// <returns>An <see cref="object? "/></returns>
+    public object? Transform_RemoveExtraEmptyLines(object? o)
+    {
+        if (o == null) return null;
+        var s = o.ToString()!;
+        var t = s.Split(Br);
+        var r = new List<string>();
+        string? last_x = null;
+        foreach (var x in t)
+        {
+            if (last_x != x)
+                r.Add(x);
+            last_x = x;
+        }
+        return string.Join(Br,r);
     }
 
     #endregion

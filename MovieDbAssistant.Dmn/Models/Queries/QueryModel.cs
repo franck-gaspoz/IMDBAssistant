@@ -21,7 +21,7 @@ public sealed record class QueryModel
     public QueryMetadata? Metadata { get; set; }
 
     /// <summary>
-    /// quasi unique key
+    /// quasi/pseudo unique key
     /// </summary>
     public string HashKey =>
         _title.ToHexLettersAndDigitsString()
@@ -31,7 +31,8 @@ public sealed record class QueryModel
             x.Select(x => x.ToHexLettersAndDigitsString())))
         + Countries.IfNullElse(() => "", x => string.Join("",
             x.Select(x => x.ToHexLettersAndDigitsString())))
-        + UserRating.ToHexLettersAndDigitsString()
+        + RatingMin?.ToHexLettersAndDigitsString()
+        + RatingMax?.ToHexLettersAndDigitsString()
         + TitleTypes.IfNullElse(() => "", x => string.Join("",
             x.Select(x => x.ToString().ToHexLettersAndDigitsString())))
         + Genres.IfNullElse(() => "", x => string.Join("",
@@ -53,7 +54,7 @@ public sealed record class QueryModel
             var matches = Regex.Matches(value, pattern);
             if (matches.Count != 0)
             {
-                _year = matches[0].Value;
+                _year = matches.Last().Value;
                 if (_title.EndsWith(Year!))
                     _title = _title[..^Year!.Length].Trim();
             }
@@ -92,11 +93,6 @@ public sealed record class QueryModel
     public string[]? Countries { get; set; }
 
     /// <summary>
-    /// user rating
-    /// </summary>
-    public string? UserRating { get; set; }
-
-    /// <summary>
     /// titles types
     /// </summary>
     public TitleTypes[]? TitleTypes { get; set; }
@@ -106,12 +102,23 @@ public sealed record class QueryModel
     /// </summary>
     public Genres[]? Genres { get; set; }
 
+    /// <summary>
+    /// min rating
+    /// </summary>
+    public string? RatingMin { get; set; }
+
+    /// <summary>
+    /// max rating
+    /// </summary>
+    public string? RatingMax { get; set; }
+
     public QueryModel(
         string title,
         string[]? languages = null,
         string? year = null,
         string[]? countries = null,
-        string? userRating = null
+        string? ratingMin = null,
+        string? ratingMax = null
         )
     {
         Title = title;
@@ -119,7 +126,8 @@ public sealed record class QueryModel
         Year = year;
         Countries = countries;
         Metadata = new();
-        UserRating = userRating;
+        RatingMin = ratingMin;
+        RatingMax = ratingMax;
         Spiders = [SpidersIds.imdb];
     }
 }

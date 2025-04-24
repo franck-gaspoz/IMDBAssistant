@@ -55,6 +55,11 @@ public sealed class HtmlDocumentBuilderContext
     /// <value>A <see cref="string? "/></value>
     public string? SubTitle => Folder?.ToLower().ToFirstUpper();
 
+    /// <summary>
+    /// context creation date
+    /// </summary>
+    public DateTime CreationDate { get; }
+
     public HtmlDocumentBuilderContext(MoviesModel data)
         : this(0, data.Movies.Count, string.Empty, null, null) { }
 
@@ -70,5 +75,6 @@ public sealed class HtmlDocumentBuilderContext
         HomeLink = homeLink;
         PreviousLink = previousLink;
         NextLink = nextLink;
+        CreationDate = DateTime.Now;
     }
 }

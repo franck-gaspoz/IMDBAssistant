@@ -46,8 +46,9 @@ public sealed class JsonQueryDataProvider : JsonDataProvider
     /// get from query model
     /// </summary>
     /// <param name="source">query model</param>
+    /// <param name="context">context</param>
     /// <returns>movies model or null</returns>
-    public override MoviesModel? Get(object? source)
+    public override MoviesModel? Get(object? source, DataProviderContext context)
     {
         if (source == null) return null;
         if (source is not QueryModel query) return null;
@@ -79,9 +80,11 @@ public sealed class JsonQueryDataProvider : JsonDataProvider
                 if (_settings.Value.Scrap.SkipIfTempOutputFileAlreadyExists
                     && File.Exists(output))
                 {
-                    Logger.LogDebug(
+                    var outputFile = Path.GetFileName(output);
+
+                    Logger.LogInformation(
                         this,
-                        $"skip search query (file '{output}' already exists): #{qid}: {query}");
+                        $"skip search query #{qid}: file '{outputFile}' already exists");
 
                     models = scraper.GetAndBuildOutput(output);
                 }

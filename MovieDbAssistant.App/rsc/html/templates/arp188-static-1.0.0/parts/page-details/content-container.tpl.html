@@ -3,7 +3,7 @@
 <div class="movie-page-detail-content-container">
 
     <!-- movie details -->
-    <div class="movie-list">
+    <div class="movie-details" style="display:none">
 
         <div class="movie-list-item-container" id="ItemModel">
 
@@ -35,14 +35,32 @@
                                     <span class="year text if-year padding-left text-align-right">{{year}}</span>
                                 </div>
 
-                                <div class="cell1_1 sources">
-                                    <img data-href="{{sources.play}}"
+                                <div class="cell1_1 sources
+                                    if_no-summary--small-list-item
+                                    if_no-year--no-year
+                                    if_no-minPicUrl--no-pic
+                                    if_no-rating--no-rating
+                                    if_no-summary--no-summary
+                                    if_no-ratingCount--no-ratingCount">
+                                    <img data-href="{{sources.preferredSourcePlay.path}}"
                                          data-target="movie_download"
                                          src="../img/play.png"
-                                         class="nav-icon play-icon if-sources-play if_no-sources-download--no-margin-right" />
-                                    <img data-href="{{sources.download}}"
+                                         class="nav-icon play-icon if-sources-preferredSourcePlay-path if_no-sources-preferredSourceDownload-path--no-margin-right" />
+                                    <img data-href="{{sources.preferredSourceDownload.path}}"
                                          src="../img/download.png"
-                                         class="nav-icon download-icon no-margin-right if-sources-download" />
+                                         class="nav-icon download-icon no-margin-right if-sources-preferredSourceDownload-path" />
+                                </div>
+
+                                <div class="cell1_1 sources-icons
+                                    if_no-summary--small-list-item
+                                    if_no-year--no-year
+                                    if_no-minPicUrl--no-pic
+                                    if_no-rating--no-rating
+                                    if_no-ratingCount--no-ratingCount">
+                                    <img src="../img/sources/{{sources.preferredSourcePlay.mediaProviderId}}.png" 
+                                         class="source-id-{{sources.preferredSourcePlay.mediaProviderId}} 
+                                                source-icon 
+                                                if-sources-preferredSourcePlay-mediaProviderId" />
                                 </div>
 
                             </td>

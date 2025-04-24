@@ -53,24 +53,25 @@ sealed class BuildQueryFileUIService :
     /// Build from query file.
     /// </summary>
     protected override void Action(ActionContext context)
-        => _documentBuilderServiceFactory.CreateDocumentBuilderService()
-        .AddListenerOnce(this, this, Signal)
-        .Build(
-            context,
-            new DocumentBuilderContext(
-                Config,
-                Logger,
-                Com!.Path,
-                DmnSettings.Value.Paths.Output,
-                DmnSettings.Value.Paths.Resources,
-                DmnSettings,
-                typeof(JsonQueryFileDataProvider),
-                typeof(HtmlDocumentBuilder),
-                new Dictionary<string, object>
-                {
-                    { Template_Id , DmnSettings.Value.Build.Html.TemplateId },
-                    { Template_Version , DmnSettings.Value.Build.Html.TemplateVersion }
-                }));
+        => _documentBuilderServiceFactory
+            .CreateDocumentBuilderService()
+            .AddListenerOnce(this, this, Signal)
+            .Build(
+                context,
+                new DocumentBuilderContext(
+                    Config,
+                    Logger,
+                    Com!.Path,
+                    DmnSettings.Value.Paths.Output,
+                    DmnSettings.Value.Paths.Resources,
+                    DmnSettings,
+                    typeof(JsonQueryFileDataProvider),
+                    typeof(HtmlDocumentBuilder),
+                    new Dictionary<string, object>
+                    {
+                        { Template_Id , DmnSettings.Value.Build.Html.TemplateId },
+                        { Template_Version , DmnSettings.Value.Build.Html.TemplateVersion }
+                    }));
 
     /// <inheritdoc/>
     public override void Handle(object sender, ActionSuccessfullyEnded @event)

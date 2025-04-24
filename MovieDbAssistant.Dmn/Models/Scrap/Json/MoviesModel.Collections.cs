@@ -58,7 +58,7 @@ public sealed partial class MoviesModel
     }
 
     /// <summary>
-    /// merge another model into this one
+    /// merge another model into this one (if not null)
     /// </summary>
     /// <param name="moviesModel">The movies model.</param>
     /// <returns>A <see cref="MoviesModel? "/>this model</returns>

@@ -1,51 +1,32 @@
 ﻿<!-- {{tpl-name}} -->
 
-<div class="movie-page-top-nav-container">
+{{{panels/navbar-top--}}}
 
-    <div class="top-nav-container-grid">
+{{--left--}}
 
-        <!-- left -->
+    <img data-href="{{navigation.home}}"
+            src="{{basePath}}img/house.png"
+            alt="icon home" class="nav-icon margin-right-double" />
 
-        <div class="top-nav-container-left">
+    {{{ui/controls/icons/nav-icon(id=button_win_refresh,name=refresh-arrow.png,alt=icon refresh,class=margin-right-half,onClick=window.location.reload();)}}}
 
-            <img data-href="{{navigation.home}}"
-                 src="{{basePath}}img/house.png"
-                 alt="icon home" class="nav-icon margin-right-double" />
+{{--middle--}}
 
-        </div>
+    <img data-href="{{navigation.previous}}"
+            src="{{basePath}}img/left-arrow.png"
+            alt="previous movie" class="nav-icon if-navigation-previous" />
+    <img data-href="{{navigation.next}}"
+            src="{{basePath}}img/left-arrow.png"
+            alt="next movie" class="nav-icon mirror-h if-navigation-next" />
+    <span class="nav-text nav-counters">{{navigation.index}} / {{navigation.total}}</span>
+    <span class="hsep"></span>
+    <span class="hsep"></span>
+    <img data-href="{{navigation.home}}#{{key}}" src="{{basePath}}img/back.png" alt="back to list" class="nav-icon icon-back" />
 
-        <!-- middle -->
+{{--right--}}
 
-        <div class="top-nav-container-middle">
+    {{{ui/controls/icons/nav-icon(id=button_win_settings,name=settings.png,alt=icon settings,class=margin-right-double,onClick=ui.openDialog(this\,'movie-details-settings'))}}}
 
-            <img data-href="{{navigation.previous}}"
-                 src="{{basePath}}img/left-arrow.png"
-                 alt="previous movie" class="nav-icon if-navigation-previous" />
-            <img data-href="{{navigation.next}}"
-                 src="{{basePath}}img/left-arrow.png"
-                 alt="next movie" class="nav-icon mirror-h if-navigation-next" />
-            <span class="nav-text nav-counters">{{navigation.index}} / {{navigation.total}}</span>
-            <span class="hsep"></span>
-            <span class="hsep"></span>
-            <img data-href="{{navigation.home}}#{{key}}" src="{{basePath}}img/back.png" alt="back to list" class="nav-icon icon-back" />
+    {{{ui/window/frame-buttons}}}
 
-        </div>
-
-        <!-- right -->
-
-        <div class="top-nav-container-right">
-
-            {{{ui/controls/icons/nav-icon(id=button_win_refresh,name=refresh-arrow.png,alt=icon refresh,class=margin-right-half,onClick=window.location.reload();)}}}
-
-            {{{ui/controls/icons/nav-icon(id=button_win_settings,name=settings.png,alt=icon settings,class=,onClick=ui.openDialog(this\,'movie-details-settings'))}}}
-
-            {{{ui/controls/icons/nav-icon(id=button_win_minimize,name=minimize-window.png,alt=icon minimize window,class=no-margin-right,onClick=ui.mawimizeWindow(this))}}}
-            {{{ui/controls/icons/nav-icon(id=button_win_restore,name=restore-window.png,alt=icon restore window,class=no-margin-right,onClick=ui.mawimizeWindow(this))}}}
-            {{{ui/controls/icons/nav-icon(id=button_win_maximize,name=maximize-window.png,alt=icon maximize window,class=no-margin-right,onClick=ui.mawimizeWindow(this))}}}
-
-            {{{ui/controls/icons/nav-icon(id=button_win_close,name=close-window.png,alt=icon close window,class=no-margin-right,onClick=ui.closeWindow(this))}}}
-
-        </div>
-
-    </div>
-</div>
+{{{--panels/navbar-top}}}

@@ -1,0 +1,8 @@
+﻿// query format #1 : 'Title'
+// -------------------------
+// - empty lines not allowed (except at start / end)
+// - commented lines allowed
+// - 1 title per line
+// - extract and remove any year (format YYYY) at end of title for use in query (filter year=)
+creed iii
+dune 2024 - part II

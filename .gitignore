@@ -344,3 +344,8 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /MovieDbAssistant.App/input/ok.ru.txt
+/MovieDbAssistant.App/input/Catalog Nov. 2024.txt
+/MovieDbAssistant.App/input/Catalog Nov. 2024.txt
+/MovieDbAssistant.App/input/Fast test.txt
+/MovieDbAssistant.App/input/-Fast test.txt
+/MovieDbAssistant.App/input/-Catalog Nov. 2024.txt

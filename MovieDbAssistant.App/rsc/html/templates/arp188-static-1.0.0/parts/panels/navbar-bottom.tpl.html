@@ -1,18 +1,43 @@
 ﻿<!-- {{tpl-name}} -->
 
 <div class="movie-page-bottom-nav-container">
+
     <div class="bottom-nav-container-grid">
+
+        <!-- left -->
+
         <div class="bottom-nav-container-left">
             <span class="nav-text">{{page.title}}</span>
         </div>
+
+        <!-- middle -->
+
         <div class="bottom-nav-container-middle">
             <span class="nav-text">{{page.subTitle}}</span>
         </div>
+
+        <!-- right -->
+
         <div class="bottom-nav-container-right">
-            <span class="with-date nav-text nav-date">{{vars.sys.now.date}}</span>
+
+            <div class="bottom-nav-container-right-left">
+                <div class="cell1_1">
+                    {{{ui/controls/icons/nav-icon(id=,class=icon-loading,name=anim-spinner.gif,alt=icon spinner loading)}}}
+                </div>
+                <div class="cell2_1">
+                    {{{ui/controls/icons/nav-icon(id=,class=icon-bar-loading,name=anim-bar-loading.gif,alt=icon bar loading)}}}
+                </div>
+            </div>
+
+            <div class="bottom-nav-container-right-right">
+                <span class="with-date nav-text nav-date">{{vars.sys.now.date}}</span>
+            </div>
+            <div class="bottom-nav-container-right-right">
+                <span class="with-clock nav-text nav-clock">{{vars.sys.now.clock}}</span>
+            </div>
+
         </div>
-        <div class="bottom-nav-container-right">
-            <span class="with-clock nav-text nav-clock">{{vars.sys.now.clock}}</span>
-        </div>
+
     </div>
+
 </div>

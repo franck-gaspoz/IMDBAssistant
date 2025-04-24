@@ -114,6 +114,11 @@ public sealed class DocumentBuilderContext
     public string? Target { get; set; }
 
     /// <summary>
+    /// context creation date
+    /// </summary>
+    public DateTime CreationDate { get; }
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="DocumentBuilderContext"/> class.
     /// </summary>
     /// <param name="config">config</param>
@@ -147,6 +152,7 @@ public sealed class DocumentBuilderContext
         if (builderOptions != null)
             foreach (var kvp in builderOptions)
                 BuilderOptions.TryAdd(kvp.Key, kvp.Value);
+        CreationDate = DateTime.Now;
     }
 
     /// <summary>

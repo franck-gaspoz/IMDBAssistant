@@ -18,15 +18,16 @@
 
         Object.assign(data, props)
 
-        // template engine
+        // bootstrap template engine
         const tpl = new Template()
         const layout = new UILayout()
         const ui = new UI()
-        ui.preSetup()
+        ui.init()
 
         $(document).ready(() => {
-            // bootstrap template engine            
+            // run tpl engine
             tpl.buildDetails(data)
+            layout.onPicLoaded = () => layout.showDetails()
             layout.postSetup()
             layout.addBackImgLoadedHandler('{{page.background}}')
             ui.setup();
@@ -46,6 +47,11 @@
 
 <body class="movie-page-detail prevent-select">
 
+    <script type="text/javascript">
+        // setup body
+        _ui().beforeLoadSetup()
+    </script>
+
     {{{backgrounds/background-container}}}
 
     {{{backgrounds/background-vignette}}}
@@ -61,7 +67,13 @@
     {{{page-details/content-container}}}
 
     <!-- dialogs -->
+
     {{{page-details/dialogs/movie-details-settings(id=movie-details-settings)}}}
+
+    <script type="text/javascript">
+        // setup end body
+        _layout().enableGlobalWidgets()
+    </script>
 
 </body>
 

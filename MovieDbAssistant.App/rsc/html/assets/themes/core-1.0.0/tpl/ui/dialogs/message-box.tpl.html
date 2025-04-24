@@ -3,7 +3,7 @@
 {{dialogClass:default==}}
 {{minHeight:default==}}
 {{minWidth:default==}}
-{{icon:default={{{ui/controls/icons/frame-icon(name=settings.png)}}}=}}
+{{icon:default={{{ui/controls/icons/frame-icon(name=settings.png,class=)}}}=}}
 
 <div class="dialog-container draggable
     {{dialogClass}}"
@@ -14,6 +14,8 @@
         <div class="dialog" style="
             min-height:{{minHeight}};
             min-width:{{minWidth}}">
+
+            <div class="dialog-content-background"></div>
 
             <div class="dialog-title-bar-container">
                 <div class="dialog-title-bar-background">
@@ -30,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="dialog-content">
                 <span class="dialog-text-content">
                     {{content}}

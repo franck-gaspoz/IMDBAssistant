@@ -20,8 +20,9 @@ public class JsonFileDataProvider : JsonDataProvider
     /// get from path
     /// </summary>
     /// <param name="source">The path.</param>
+    /// <param name="context">context</param>
     /// <returns>A <see cref="MoviesModel"/></returns>
-    public override MoviesModel? Get(object? source)
+    public override MoviesModel? Get(object? source, DataProviderContext context)
     {
         if (source == null) return null;
         var src = (string)source;
@@ -31,6 +32,6 @@ public class JsonFileDataProvider : JsonDataProvider
             "parse json: "
             + Path.GetFileName(src));
 
-        return base.Get(File.ReadAllText(src));
+        return base.Get(File.ReadAllText(src), new DataProviderContext());
     }
 }

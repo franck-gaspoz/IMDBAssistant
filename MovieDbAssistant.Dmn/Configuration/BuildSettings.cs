@@ -28,4 +28,10 @@ public sealed class BuildSettings
     /// </summary>
     /// <value>A <see cref="string"/></value>
     public required HtmlSettings Html { get; set; }
+
+    /// <summary>
+    /// limit to new data
+    /// </summary>
+    /// <value>A <see cref="bool"/></value>
+    public bool LimitToNewData {  get; set; }
 }

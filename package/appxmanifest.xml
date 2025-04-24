@@ -19,7 +19,7 @@
 	</Properties>
 	
 	<Resources>
-		<Resource Language="en-US" />
+		<Resource Language="EN-US" />
 	</Resources>
 	
 	<Dependencies>
@@ -35,7 +35,7 @@
 	<Applications>
 		<Application 
 			Id="MovieDbAssistant" 
-			Executable="MovieDbAssistant.exe"
+			Executable="MovieDbAssistant.exe"			
 			
 		  uap10:RuntimeBehavior="packagedClassicApp"
 		  uap10:TrustLevel="mediumIL">

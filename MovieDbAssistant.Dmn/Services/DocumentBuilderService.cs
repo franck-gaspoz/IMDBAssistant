@@ -85,7 +85,7 @@ public sealed class DocumentBuilderService : IIdentifiable
             _logger.LogInformation(this, _dmnSettings.Value.Texts.ProcFile
                 + Path.GetFileName(context.Source));
 
-            var movies = dataProvider.Get(context.Source)
+            var movies = dataProvider.Get(context.Source, new DataProviderContext())
                 ?? throw new InvalidOperationException(
                     _dmnSettings.Value.Texts.DataProviderFailed
                     + context.Source?.ToString());

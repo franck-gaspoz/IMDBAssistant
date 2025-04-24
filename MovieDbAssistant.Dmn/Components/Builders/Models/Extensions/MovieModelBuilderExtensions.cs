@@ -49,8 +49,18 @@ public static partial class MovieModelBuilderExtensions
         model.MetaData.ScraperToolVersion = settings
             .App.MovieDbScraperToolVersion;
         model.MetaData.SpiderId = spiderId?.ToString();
-        model.Sources.Play = query.Metadata?.Source;
-        model.Sources.Download = query.Metadata?.Download;
+
+        model.Sources.Clear();
+
+        var mediaSourcePlay = new MediaSource(query.Metadata?.Source);
+        var mediaSourceDownload = new MediaSource(query.Metadata?.Download);
+        if (mediaSourcePlay != null)
+            model.Sources.Play.Add(mediaSourcePlay);
+        if (mediaSourceDownload != null)
+            model.Sources.Download.Add(mediaSourceDownload);
+
+        model.Sources.SetupMediaProviderId(settings);
+
         model.MetaData.Query = query;
         if (queryCacheFiles != null)
             model.MetaData.Query.Metadata!.QueryCacheFiles = queryCacheFiles;
@@ -85,6 +95,7 @@ public static partial class MovieModelBuilderExtensions
                 settings,
                 spiderId,
                 queryCacheFiles);
+
         return models;
     }
 }

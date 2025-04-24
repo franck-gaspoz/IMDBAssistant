@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{193454
 		assets\multimedia.png = assets\multimedia.png
 		assets\snap-details.png = assets\snap-details.png
 		assets\snap-list.png = assets\snap-list.png
+		assets\software-suite-screenshot.png = assets\software-suite-screenshot.png
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieDbAssistant.Dmn", "MovieDbAssistant.Dmn\MovieDbAssistant.Dmn.csproj", "{F0491CCE-5C42-4F29-BE41-F90DC44DD252}"
@@ -30,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{F03B6F94-AF1
 	ProjectSection(SolutionItems) = preProject
 		doc\credits.txt = doc\credits.txt
 		doc\manual.md = doc\manual.md
+		media-providers.txt = media-providers.txt
 		doc\notes.txt = doc\notes.txt
 		doc\templates.md = doc\templates.md
 	EndProjectSection

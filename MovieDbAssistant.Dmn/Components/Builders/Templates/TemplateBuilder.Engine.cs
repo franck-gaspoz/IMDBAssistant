@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
 
 using MovieDbAssistant.Dmn.Components.Builders.Html;
-using MovieDbAssistant.Dmn.Components.Builders.Templates.PageBuilders;
 using MovieDbAssistant.Dmn.Models.Build;
 using MovieDbAssistant.Dmn.Models.Scrap.Json;
 
@@ -35,7 +34,7 @@ public partial class TemplateBuilder
         var src = JsonSerializer.Serialize(
             GetTemplateProps(
                 build,
-                data, 
+                data,
                 htmlContext),
             JsonSerializerProperties.Value)!;
 

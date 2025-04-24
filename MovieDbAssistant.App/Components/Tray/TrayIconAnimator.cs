@@ -48,7 +48,8 @@ sealed class TrayIconAnimator : BackgroundWorkerWrapper
         Setup(
             _config,
             (ctx, o, e) => Next(),
-            _appSettings.Value.Anims.Interval.WaitTrayIcon);
+            _appSettings.Value.Anims.Interval.WaitTrayIcon,
+            autoRepeat: true);
         base.Run(context, caller);
         return this;
     }
@@ -63,6 +64,7 @@ sealed class TrayIconAnimator : BackgroundWorkerWrapper
         _trayMenuService.NotifyIcon.Icon = ico;
         if (++_n > t.Length - 1) _n = 0;
     }
+
     protected override string LogPrefix()
         => LogNativePrefix();
 }

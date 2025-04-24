@@ -33,11 +33,6 @@ public sealed class ScrapSettings
     public PrefersSettings Prefers { get; set; } = new();
 
     /// <summary>
-    /// if provided in query, the year replaces the scraped data year
-    /// </summary>
-    public bool KeepQueryYear { get; set; }
-
-    /// <summary>
     /// Gets or sets the default filters.
     /// </summary>
     /// <value>A <see cref="FiltersSettings"/></value>

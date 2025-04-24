@@ -1,36 +1,21 @@
 ﻿<!-- {{tpl-name}} -->
 
-<div class="movie-page-top-nav-container">
+{{{panels/navbar-top--}}}
 
-    <div class="top-nav-container-grid">
+{{--left--}}
 
-        <!-- left -->
+    {{{ui/controls/icons/nav-icon(id=button_win_refresh,name=refresh-arrow.png,alt=icon refresh,class=margin-right-half,onClick=window.location.reload();)}}}
 
-        <div class="top-nav-container-left">
-            <span class="nav-text"></span>
-        </div>
+    <span class="nav-text"></span>
 
-        <!-- middle -->
+{{--middle--}}
 
-        <div class="top-nav-container-middle">
-            <div class="movie-page-list-title">{{page.title}} : {{page.subTitle}}</div>
-        </div>
+    <div class="movie-page-list-title">{{page.title}}</div>
 
-        <!-- right -->
+{{--right--}}
 
-        <div class="top-nav-container-right">
+    {{{ui/controls/icons/nav-icon(id=button_win_settings,name=settings.png,alt=icon settings,class=margin-right-double,onClick=ui.openDialog(this\,'movie-list-settings'))}}}
 
-            {{{ui/controls/icons/nav-icon(id=button_win_refresh,name=refresh-arrow.png,alt=icon refresh,class=margin-right-half,onClick=window.location.reload();)}}}
+    {{{ui/window/frame-buttons}}}
 
-            {{{ui/controls/icons/nav-icon(id=button_win_settings,name=settings.png,alt=icon settings,class=,onClick=ui.openDialog(this\,'movie-list-settings'))}}}
-
-            {{{ui/controls/icons/nav-icon(id=button_win_minimize,name=minimize-window.png,alt=icon minimize window,class=no-margin-right,onClick=ui.mawimizeWindow(this))}}}
-            {{{ui/controls/icons/nav-icon(id=button_win_restore,name=restore-window.png,alt=icon restore window,class=no-margin-right,onClick=ui.mawimizeWindow(this))}}}
-            {{{ui/controls/icons/nav-icon(id=button_win_maximize,name=maximize-window.png,alt=icon maximize window,class=no-margin-right,onClick=ui.mawimizeWindow(this))}}}
-
-            {{{ui/controls/icons/nav-icon(id=button_win_close,name=close-window.png,alt=icon close window,class=no-margin-right,onClick=ui.closeWindow(this))}}}
-
-        </div>
-
-    </div>
-</div>
+{{{--panels/navbar-top}}}

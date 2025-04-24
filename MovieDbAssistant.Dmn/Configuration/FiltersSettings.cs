@@ -29,4 +29,14 @@ public sealed class FiltersSettings
     /// type of title (movie,game,..)
     /// </summary>
     public TitleTypes[]? Types { get; set; }
+
+    /// <summary>
+    /// min rating
+    /// </summary>
+    public string? RatingMin { get; set; }
+
+    /// <summary>
+    /// max rating
+    /// </summary>
+    public string? RatingMax { get; set; }
 }

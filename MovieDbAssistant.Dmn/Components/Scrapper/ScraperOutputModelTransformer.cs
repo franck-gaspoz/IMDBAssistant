@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
+using MovieDbAssistant.Dmn.Components.DataProviders;
 using MovieDbAssistant.Dmn.Components.DataProviders.Json;
 using MovieDbAssistant.Dmn.Configuration;
 using MovieDbAssistant.Dmn.Models.Scrap.Json;
@@ -33,7 +34,7 @@ public sealed class ScraperOutputModelTransformer
     {
         output = Wrap(output);
 
-        var models = _jsonDataProvider.Get(output)!;
+        var models = _jsonDataProvider.Get(output, new DataProviderContext())!;
 
         return models;
     }
